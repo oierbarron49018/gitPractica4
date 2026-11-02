@@ -1,5 +1,13 @@
+import java.time.LocalDateTime;// Datos del cliente, vehículo y  cita.
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Locale;
 import java.util.Scanner;
 
+// Formatos fecha
+private static final String PATRON_FECHA = "dd/MM/yyyy HH:mm";
+        private static final DateTimeFormatter FORMATO_ESPANOL =
+                DateTimeFormatter.ofPattern(PATRON_FECHA, new Locale("es", "ES"));
 // Entrada de datos.
 private static Scanner scanner = new Scanner(System.in);
 
@@ -38,5 +46,33 @@ private static Scanner scanner = new Scanner(System.in);
                         System.out.println("Opción no válida.");
                         break;
                 }
+            }
+        }
+        public static void consultarCitas() {
+            // No lo hace nadie. Necesitamos una colección.
+
+        }
+        public static String formatearFechaEspanol() {
+            // De las fechas se encarga el alumno C
+            if (fechaCita == null) {
+                return "Fecha no disponible";
+            }
+            return fechaCita.format(FORMATO_ESPANOL);
+        }
+        public static void leerYValidarFecha() {
+            // De las fechas se encarga el alumno C
+            scanner.nextLine();
+            System.out.print("Fecha y hora de la cita (" + PATRON_FECHA + "): ");
+            String entrada = scanner.nextLine();
+
+            try {
+                // Intenta parsear la cadena ingresada según el patrón definido
+                fechaCita = LocalDateTime.parse(entrada, FORMATO_ESPANOL);
+                System.out.println(" Fecha correcta.");
+
+            } catch (DateTimeParseException e) {
+                System.out.println("Formato incorrecto. Debe usar exactamente el formato: dd/MM/yyyy HH:mm");
+                System.out.println("Se asignará la fecha y hora actual por defecto.");
+                fechaCita = LocalDateTime.now();
             }
         }
