@@ -1,6 +1,3 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -104,6 +101,10 @@ private static String matricula;
             System.out.println("========================================\n");
 
             // Se pueden crear funciones varias, en vez de todo el código en registrar cita.
+        }
+        public static void consultarCitas() {
+        // No lo hace nadie. Necesitamos una colección.
+
         }
         public static String formatearFechaEspanol() {
             // De las fechas se encarga el alumno C
