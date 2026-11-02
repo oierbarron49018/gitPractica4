@@ -1,22 +1,25 @@
-<<<<<<< HEAD
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
-    }
-}
-=======
-import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Locale;
+import java.util.Scanner;// Datos del cliente, vehículo y  cita.
+// Variables globales para poder usarlas en registrar cita y en calcular coste.
+private static String matricula;
+        private static String marca;
+        private static String modelo;
+        private static int tipoServicio;
+        private static String cliente;
+        private static LocalDateTime fechaCita;
 
+        // Formatos fecha
+        private static final String PATRON_FECHA = "dd/MM/yyyy HH:mm";
+        private static final DateTimeFormatter FORMATO_ESPANOL =
+                DateTimeFormatter.ofPattern(PATRON_FECHA, new Locale("es", "ES"));
+
+        // Entrada de datos.
 // Entrada de datos.
 private static Scanner scanner = new Scanner(System.in);
 
@@ -57,4 +60,57 @@ private static Scanner scanner = new Scanner(System.in);
                 }
             }
         }
->>>>>>> 5363ab0c3845dabea4b48fd992e0f00ce338968c
+
+        public static void calcularCosteServicio() {
+            double precioBase;
+
+            switch (tipoServicio) {
+                case 1:
+                    precioBase = 50.0;  // Cambio de aceite y filtro
+                    break;
+                case 2:
+                    precioBase = 120.0; // Revisión general / Pre-ITV
+                    break;
+                case 3:
+                    precioBase = 200.0; // Cambio de frenos y discos
+                    break;
+                case 4:
+                    precioBase = 350.0; // Reparación de distribución
+                    break;
+                default:
+                    System.out.println("Opción de servicio no válida.");
+                    precioBase = 80.0;
+                    break;
+            }
+
+            String matriculaLimpia = matricula.trim().toUpperCase();
+
+
+            double porcentajeDescuento = 0.0;
+
+            // Regla A: Vehículos híbridos/eléctricos o flotas especiales (ejemplo: terminan en "ECO")
+            if (matriculaLimpia.endsWith("ECO")) {
+                porcentajeDescuento = 0.20; // 20% de descuento
+                System.out.println("Aplicado 20% de descuento por matrícula ECO.");
+
+                // Regla B: Vehículos antiguos o promocionales (ejemplo: contienen el número "00")
+            } else
+            if (matriculaLimpia.contains("00")) {
+                porcentajeDescuento = 0.10; // 10% de descuento
+                System.out.println("Aplicado 10% de descuento por promoción especial (serie 00).");
+
+                // Regla C: Formato histórico o especial (ejemplo: empieza por la letra 'H')
+            } else
+            if (matriculaLimpia.startsWith("H")) {
+                porcentajeDescuento = 0.15; // 15% de descuento
+                System.out.println("Aplicado 15% de descuento para vehículo histórico.");
+            } else {
+                System.out.println("No se aplican descuentos a esta matrícula.");
+            }
+
+            // 4. Cálculo final del coste
+            double descuento = precioBase * porcentajeDescuento;
+            double precioFinal = precioBase - descuento;
+
+            System.out.printf("El importe total a pagar es: %.2f €\n", precioFinal);
+        }
