@@ -27,6 +27,9 @@ bin/
 .vscode/
 
 ### Mac OS ###
+<<<<<<< HEAD
+.DS_Store
+=======
 .DS_Store
 
 ### IDEA ###
@@ -34,3 +37,4 @@ bin/
 *. iml
 *. iws
 *. ipr
+>>>>>>> 5363ab0c3845dabea4b48fd992e0f00ce338968c
