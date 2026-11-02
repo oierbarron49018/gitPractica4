@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/Ariketa4.b.2.iml" filepath="$PROJECT_DIR$/Ariketa4.b.2.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/Practica4github.iml" filepath="$PROJECT_DIR$/Practica4github.iml" />
+>>>>>>> 5363ab0c3845dabea4b48fd992e0f00ce338968c
     </modules>
   </component>
 </project>
